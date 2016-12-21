@@ -1,5 +1,5 @@
 {% extends 'blog/base.html' %}
-
+{% load embed_video_tags %}
 {% block content %}
     {% for post in posts %}
         <div class="post">
@@ -8,7 +8,12 @@
             </div>
             <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
             <p>{{ post.text|linebreaksbr }}</p>
+            {% video post.video as video %}
+                <p><img src="{{ video.thumbnail }}" width=60 height=45 class="img-rounded"></p>
+            {% endvideo %}
             <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.approved_comments.count }}</a>
         </div>
-    {% endfor %}
+
+        {% endfor %}
+
 {% endblock content %}

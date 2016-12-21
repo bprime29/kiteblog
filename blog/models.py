@@ -8,7 +8,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     text = models.TextField()
     video = EmbedVideoField(verbose_name='My video',
-                            help_text='This is a help text', default='SOME STRING')
+                            help_text='This is a help text', default='', blank=True)
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
 

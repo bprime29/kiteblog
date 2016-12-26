@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.core.urlresolvers import reverse
 from embed_video.fields import EmbedVideoField
+from django.utils.translation import ugettext_lazy as _
 
 class Post(models.Model):
     author = models.ForeignKey('auth.User')
@@ -41,3 +42,7 @@ class Comment(models.Model):
 
 class Item(models.Model):
     video = EmbedVideoField()  # same like models.URLField()
+
+class Attachment(models.Model):
+    post = models.ForeignKey('Post', verbose_name = 'Post', null=True)
+    file = models.FileField(_('Attachment'), upload_to='attachment', null=True, blank=True)
